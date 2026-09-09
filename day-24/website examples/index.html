@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>Low-poly CSS animations</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="page-shell">
+    <header class="intro">
+      <p class="eyebrow">CSS motion study / 01</p>
+      <h1>Low-poly<br><em>playground</em></h1>
+      <p class="intro-copy">Three small experiments made from sharp edges, layered color, and a little movement.</p>
+    </header>
+
+    <section class="demo-grid" aria-label="Animation examples">
+      <article class="demo-panel click-panel">
+        <div class="panel-heading">
+          <div><span class="panel-number">01</span>
+            <h2>Click / crystal burst</h2>
+          </div>
+          <span class="interaction-tag">click</span>
+        </div>
+        <button class="crystal-stage" id="crystalButton" type="button" aria-label="Click to burst the crystal">
+          <span class="crystal-shadow"></span>
+          <span class="crystal crystal-main"></span>
+          <span class="crystal crystal-left"></span>
+          <span class="crystal crystal-right"></span>
+          <span class="spark spark-one"></span><span class="spark spark-two"></span><span
+            class="spark spark-three"></span>
+          <span class="stage-hint">click the crystal</span>
+        </button>
+        <p class="panel-note">A button toggles a burst state. CSS handles the scale, spin, and spark timing.</p>
+      </article>
+
+      <article class="demo-panel hover-panel">
+        <div class="panel-heading">
+          <div><span class="panel-number">02</span>
+            <h2>Hover / shifting faces</h2>
+          </div>
+          <span class="interaction-tag">hover</span>
+        </div>
+        <div class="hover-stage" tabindex="0" aria-label="Hover or focus the polygon">
+          <div class="poly-orbit orbit-a"></div>
+          <div class="poly-orbit orbit-b"></div>
+          <div class="poly-object">
+            <span class="poly-face face-top"></span><span class="poly-face face-left"></span><span
+              class="poly-face face-right"></span>
+          </div>
+          <span class="stage-hint">move over it</span>
+        </div>
+        <p class="panel-note">Hover or focus the shape to lift its faces, rotate the orbit, and change the palette.</p>
+      </article>
+
+      <article class="demo-panel drag-panel">
+        <div class="panel-heading">
+          <div><span class="panel-number">03</span>
+            <h2>Drag / move the prism</h2>
+          </div>
+          <span class="interaction-tag">drag</span>
+        </div>
+        <div class="drag-stage" id="dragStage" aria-label="Draggable low-poly prism">
+          <span class="drag-grid"></span>
+          <button class="drag-prism" id="dragPrism" type="button" aria-label="Drag the prism around the stage">
+            <span class="prism-top"></span><span class="prism-front"></span><span class="prism-side"></span>
+          </button>
+          <span class="stage-hint">grab + drag</span>
+        </div>
+        <p class="panel-note">Pointer events update the transform while you drag. The prism stays inside the stage.</p>
+      </article>
+    </section>
+
+    <footer><span>CSS only for the visuals</span><span>pointer events for the drag</span></footer>
+  </main>
+  <script>
+    const crystalButton = document.querySelector('#crystalButton');
+    crystalButton.addEventListener('click', () => {
+      crystalButton.classList.remove('is-bursting');
+      void crystalButton.offsetWidth;
+      crystalButton.classList.add('is-bursting');
+    });
+
+    const dragStage = document.querySelector('#dragStage');
+    const dragPrism = document.querySelector('#dragPrism');
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    dragPrism.addEventListener('pointerdown', (event) => {
+      isDragging = true;
+      dragPrism.setPointerCapture(event.pointerId);
+      const prismRect = dragPrism.getBoundingClientRect();
+      offsetX = event.clientX - prismRect.left - prismRect.width / 2;
+      offsetY = event.clientY - prismRect.top - prismRect.height / 2;
+      dragPrism.classList.add('is-dragging');
+    });
+
+    dragPrism.addEventListener('pointermove', (event) => {
+      if (!isDragging) return;
+      const stageRect = dragStage.getBoundingClientRect();
+      const prismWidth = dragPrism.offsetWidth;
+      const prismHeight = dragPrism.offsetHeight;
+      const x = Math.max(prismWidth / 2, Math.min(stageRect.width - prismWidth / 2, event.clientX - stageRect.left - offsetX));
+      const y = Math.max(prismHeight / 2, Math.min(stageRect.height - prismHeight / 2, event.clientY - stageRect.top - offsetY));
+      dragPrism.style.left = `${x}px`;
+      dragPrism.style.top = `${y}px`;
+    });
+
+    const stopDragging = () => {
+      isDragging = false;
+      dragPrism.classList.remove('is-dragging');
+    };
+    dragPrism.addEventListener('pointerup', stopDragging);
+    dragPrism.addEventListener('pointercancel', stopDragging);
+  </script>
+</body>
+
+</html>
