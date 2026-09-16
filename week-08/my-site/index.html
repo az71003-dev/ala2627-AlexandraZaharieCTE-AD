@@ -1,52 +1,76 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- DAY 1 · TODO 1: change the title to your topic -->
-  <title>My Site</title>
+  <title>Water Bottle Design Studio</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- The console panel: shows console.log messages and errors at the bottom of the page,
-       because school Chromebooks block the browser's own console.
-       DAY 4: delete this one line before you ship, so your live site shows only your page. -->
   <script src="console-panel.js" defer></script>
-  <!-- This line connects your JavaScript. "defer" means: wait until the page has loaded, then run it. Do not delete it. -->
   <script src="script.js" defer></script>
 </head>
-<body>
-  <!--
-    MY CONTRACT FOR THE WEEK  (DAY 1 · TODO 2 — fill in all four, then save)
-    My topic:
-    My colours:
-    My headline:
-    The one thing only my site does:
-  -->
 
+<body>
   <header class="top">
-    <p class="kicker">Week 8 project</p>
-    <!-- DAY 1 · TODO 3: your headline, in your own words -->
-    <h1>Welcome to my site</h1>
-    <!-- DAY 1 · TODO 4: one line that tells a stranger what this page is about -->
-    <p class="tagline">Replace this with one line about your topic.</p>
+    <p class="kicker">Water bottle design studio</p>
+    <h1>Create the perfect bottle</h1>
+    <p class="tagline">Pick a colour, adjust the lid, and find a look that feels right for your day.</p>
   </header>
 
   <main class="cards">
     <section class="card">
-      <h2>About</h2>
-      <p>Replace this with two sentences about your topic.</p>
+      <h2>Choose your design</h2>
+
+      <div class="picker-group">
+        <p class="picker-label">Bottle colour</p>
+        <div class="picker-row">
+          <button class="swatch active" type="button" data-design="classic">Classic</button>
+          <button class="swatch" type="button" data-design="sunset">Sunset</button>
+          <button class="swatch" type="button" data-design="forest">Forest</button>
+        </div>
+      </div>
+
+      <div class="picker-group">
+        <p class="picker-label">Lid style</p>
+        <div class="picker-row">
+          <button class="swatch" type="button" data-lid="carry">Carry lid</button>
+          <button class="swatch" type="button" data-lid="sip">Sip lid</button>
+          <button class="swatch active" type="button" data-lid="straw">Straw lid</button>
+        </div>
+      </div>
+
+      <div class="picker-group">
+        <p class="picker-label">Size</p>
+        <div class="picker-row">
+          <button class="swatch" type="button" data-size="18">18 oz</button>
+          <button class="swatch active" type="button" data-size="24">24 oz</button>
+          <button class="swatch" type="button" data-size="32">32 oz</button>
+        </div>
+      </div>
     </section>
 
-    <section class="card feature">
-      <h2>Try it</h2>
-      <!-- DAY 2: this is your button. Its id, "action", is how JavaScript finds it. -->
-      <button id="action" type="button">Click me</button>
-      <!-- DAY 2: JavaScript writes into this paragraph. Its id is "output". -->
-      <p id="output">Nothing has happened yet.</p>
+    <section class="card feature bottle-card">
+      <h2>Bottle preview</h2>
+
+      <div class="bottle-scene" aria-live="polite">
+        <div class="bottle" id="bottle">
+          <div class="cap" id="cap"></div>
+          <div class="body">
+            <div class="ring"></div>
+            <div class="label">
+              <span id="bottle-name">Classic</span>
+            </div>
+          </div>
+          <div class="handle" id="handle"></div>
+        </div>
+      </div>
+
+      <p id="design-status" class="status">Classic design • Straw lid • 24 oz</p>
     </section>
 
     <section class="card">
-      <h2>Why it matters</h2>
-      <p>Replace this with one reason someone should care about your topic.</p>
+      <h2>Why this matters</h2>
+      <p>A great water bottle should feel good in your hand, match your style, and fit the way you live each day.</p>
     </section>
   </main>
 
@@ -54,4 +78,5 @@
     <p>Built in App Design 1.</p>
   </footer>
 </body>
+
 </html>

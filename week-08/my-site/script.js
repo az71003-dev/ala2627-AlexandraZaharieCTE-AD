@@ -1,34 +1,89 @@
-// script.js — your Week 8 project. One file, four days.
-// Work on ONE day's section at a time. Save (commit and push) at every save point.
+const bottle = document.querySelector('#bottle');
+const bottleName = document.querySelector('#bottle-name');
+const designStatus = document.querySelector('#design-status');
 
-// ─────────────── DAY 1 · Say hello ───────────────
-// TODO: make JavaScript print a message in the console.
-//       Your message shows in the Console panel at the bottom of your page.
-//       Remove the two slashes at the start of the next line, then save and reload.
-// console.log("script.js is connected");
+const designs = {
+  classic: {
+    name: 'Classic',
+    body: '#dfeafc',
+    accent: '#1d3160',
+    cap: '#f5c842',
+    label: '#ffffff',
+    handle: 'rgba(12, 20, 35, 0.45)'
+  },
+  sunset: {
+    name: 'Sunset',
+    body: '#f7b39c',
+    accent: '#9c2d42',
+    cap: '#f7d776',
+    label: '#fff6ea',
+    handle: 'rgba(130, 50, 40, 0.55)'
+  },
+  forest: {
+    name: 'Forest',
+    body: '#a7d3b3',
+    accent: '#1d4d3e',
+    cap: '#d6ba7c',
+    label: '#edf8f0',
+    handle: 'rgba(12, 52, 42, 0.55)'
+  }
+};
 
+const lidStyles = {
+  carry: 'Carry lid',
+  sip: 'Sip lid',
+  straw: 'Straw lid'
+};
 
-// ─────────────── DAY 2 · Wire the click ───────────────
-// TODO 1: find the button by its id. The # means "id".
-// const button = document.querySelector("#action");
+const sizeMap = {
+  18: '18 oz',
+  24: '24 oz',
+  32: '32 oz'
+};
 
-// TODO 2: find the paragraph JavaScript writes into.
-// const output = document.querySelector("#output");
+let activeDesign = 'classic';
+let activeLid = 'straw';
+let activeSize = '24';
 
-// TODO 3: when the button is clicked, change the words on the page.
-// button.addEventListener("click", function () {
-//   output.textContent = "You clicked it!";
-// });
+function updateBottle() {
+  const design = designs[activeDesign];
 
+  bottle.style.setProperty('--body-color', design.body);
+  bottle.style.setProperty('--brand-color', design.accent);
+  bottle.style.setProperty('--cap-color', design.cap);
+  bottle.style.setProperty('--label-color', design.label);
+  bottle.style.setProperty('--handle-color', design.handle);
 
-// ─────────────── DAY 3 · Make it YOUR thing ───────────────
-// TODO 1: a variable that remembers something between clicks.
-//         Put it HERE, at the top of this section, not inside a function.
+  bottle.dataset.lid = activeLid;
+  bottle.dataset.size = activeSize;
+  bottleName.textContent = design.name;
 
-// TODO 2: a function that changes the variable and shows the new value on the page.
+  designStatus.textContent = `${design.name} design • ${lidStyles[activeLid]} • ${sizeMap[activeSize]}`;
+}
 
-// TODO 3: make the button run your function (you can replace the Day 2 listener).
+document.querySelectorAll('[data-design]').forEach((button) => {
+  button.addEventListener('click', () => {
+    activeDesign = button.dataset.design;
+    document.querySelectorAll('[data-design]').forEach((item) => item.classList.toggle('active', item === button));
+    updateBottle();
+  });
+});
 
+document.querySelectorAll('[data-lid]').forEach((button) => {
+  button.addEventListener('click', () => {
+    activeLid = button.dataset.lid;
+    document.querySelectorAll('[data-lid]').forEach((item) => item.classList.toggle('active', item === button));
+    updateBottle();
+  });
+});
 
-// ─────────────── DAY 4 · Level up ───────────────
-// ONE upgrade. Retype it and be able to explain every line.
+document.querySelectorAll('[data-size]').forEach((button) => {
+  button.addEventListener('click', () => {
+    activeSize = button.dataset.size;
+    document.querySelectorAll('[data-size]').forEach((item) => item.classList.toggle('active', item === button));
+    updateBottle();
+  });
+});
+
+updateBottle();
+
