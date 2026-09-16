@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stanley Water Bottle Design</title>
+  <link rel="stylesheet" href="stanley.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <p class="kicker">Stanley custom design</p>
+    <h1>Build My Perfect Tumbler</h1>
+    <p class="tagline">Pick the colour, lid, and size that fits your day best.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <h2>Choose a style</h2>
+
+      <div class="picker-group">
+        <p class="picker-label">Bottle colour</p>
+        <div class="picker-row">
+          <button class="swatch active" type="button" data-design="classic">Classic</button>
+          <button class="swatch" type="button" data-design="sunset">Sunset</button>
+          <button class="swatch" type="button" data-design="forest">Forest</button>
+        </div>
+      </div>
+
+      <div class="picker-group">
+        <p class="picker-label">Lid style</p>
+        <div class="picker-row">
+          <button class="swatch" type="button" data-lid="carry">Carry lid</button>
+          <button class="swatch" type="button" data-lid="sip">Sip lid</button>
+          <button class="swatch active" type="button" data-lid="straw">Straw lid</button>
+        </div>
+      </div>
+
+      <div class="picker-group">
+        <p class="picker-label">Size</p>
+        <div class="picker-row">
+          <button class="swatch" type="button" data-size="18">18 oz</button>
+          <button class="swatch active" type="button" data-size="24">24 oz</button>
+          <button class="swatch" type="button" data-size="32">32 oz</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel preview-panel">
+      <h2>Tumbler preview</h2>
+
+      <div class="bottle-scene" aria-live="polite">
+        <div class="bottle tumbler" id="bottle">
+          <div class="lid"></div>
+          <div class="straw"></div>
+          <div class="body">
+            <div class="ring"></div>
+            <div class="label">
+              <span id="bottle-name">Classic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p id="design-status" class="status">Classic design • Straw lid • 24 oz</p>
+    </section>
+  </main>
+
+  <script src="stanley.js" defer></script>
+</body>
+
+</html>
