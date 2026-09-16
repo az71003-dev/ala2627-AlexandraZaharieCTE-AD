@@ -38,12 +38,13 @@ const lidStyles = {
 const sizeMap = {
   18: '18 oz',
   24: '24 oz',
-  32: '32 oz'
+  32: '32 oz',
+  40: '40 oz'
 };
 
 let activeDesign = 'classic';
 let activeLid = 'straw';
-let activeSize = '24';
+let activeSize = '40';
 
 function updateBottle() {
   const design = designs[activeDesign];
